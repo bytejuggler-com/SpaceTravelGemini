@@ -132,3 +132,7 @@ SpaceTravel/
     ├── GiantStarCoronaScene.cs       # Scene 3: Raymarched 3D FBM hypergiant star + corona flames + CME sparks
     └── DynamicGalaxyScene.cs         # Scene 4: 5,500-particle Keplerian 3D spiral galaxy + H-II knots
 ```
+
+## License
+
+The source code is released under the [MIT License](LICENSE). Copyright (c) 2026 BlackLizard (bytejuggler.com). Raylib-cs and raylib, restored from NuGet, keep their own (zlib) licenses.

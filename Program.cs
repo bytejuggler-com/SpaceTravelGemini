@@ -18,12 +18,19 @@ public static partial class Program
     [DllImport("user32.dll")]
     private static extern bool BringWindowToTop(nint hWnd);
 
-    private const string LogPath = @"c:\Code\AI\Test\SpaceTravel\debug.log";
-    private static void Log(string msg) => File.AppendAllText(LogPath, $"[{DateTime.Now:HH:mm:ss.fff}] {msg}\n");
+    // Log next to the executable, whatever the current working directory is.
+    private static readonly string LogPath = Path.Combine(AppContext.BaseDirectory, "debug.log");
+
+    private static void Log(string msg)
+    {
+        try { File.AppendAllText(LogPath, $"[{DateTime.Now:HH:mm:ss.fff}] {msg}\n"); }
+        catch { /* logging is optional; never stop the demo because of it */ }
+    }
 
     public static unsafe void Main()
     {
-        File.WriteAllText(LogPath, "=== SpaceTravel Starting ===\n");
+        try { File.WriteAllText(LogPath, "=== SpaceTravel Starting ===\n"); }
+        catch { /* e.g. read-only folder: run without a log */ }
         try
         {
             Raylib.SetConfigFlags(ConfigFlags.ResizableWindow | ConfigFlags.VSyncHint | ConfigFlags.Msaa4xHint | ConfigFlags.AlwaysRunWindow);
